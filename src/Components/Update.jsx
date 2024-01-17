@@ -10,6 +10,22 @@ const Update = () => {
         const name = form.name.value;
         const email = form.email.value;
         console.log(name, email);
+        const UpdatedUser = { name, email };
+
+        fetch(`http://localhost:5000/users/${loadedUser._id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type' : 'application/json'
+            },
+            body: JSON.stringify(UpdatedUser)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.modifiedCount>0){
+                    alert('user updated successfully')
+                }
+            })
 
     }
 
